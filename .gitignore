@@ -1,0 +1,3 @@
+preview_final.gif
+*.png
+!assets/*.png

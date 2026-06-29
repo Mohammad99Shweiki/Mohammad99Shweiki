@@ -1,0 +1,39 @@
+name: Refresh profile cards
+
+on:
+  schedule:
+    - cron: "17 5 * * *"   # daily ~05:17 UTC
+  workflow_dispatch:        # manual run button
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Needs a PAT (classic: repo + read:user, or fine-grained with
+      # contents:read + metadata) so PRIVATE contributions are counted.
+      # Without it the job fails and the committed (correct) cards are kept.
+      - name: Generate cards
+        env:
+          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: python3 scripts/generate.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain assets/)" ]; then
+            git add assets/
+            git commit -m "chore: refresh profile cards"
+            git push
+          else
+            echo "No changes."
+          fi
