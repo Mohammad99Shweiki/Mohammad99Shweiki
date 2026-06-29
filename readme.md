@@ -23,6 +23,10 @@
 </p>
 
 <p align="center">
+  <img src="./assets/activity.svg" alt="Contribution activity" width="840">
+</p>
+
+<p align="center">
   <a href="https://www.linkedin.com/in/mohammad-shweiki"><img src="https://img.shields.io/badge/LinkedIn-161a26?style=flat-square&logo=linkedin&logoColor=7aa2f7&labelColor=161a26" alt="LinkedIn"></a>
   <a href="mailto:mohammadshwiki226@gmail.com"><img src="https://img.shields.io/badge/Email-161a26?style=flat-square&logo=gmail&logoColor=ff9e64&labelColor=161a26" alt="Email"></a>
   <a href="https://github.com/Mohammad99Shweiki"><img src="https://img.shields.io/badge/@Mohammad99Shweiki-161a26?style=flat-square&logo=github&logoColor=c0caf5&labelColor=161a26" alt="GitHub"></a>

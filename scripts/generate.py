@@ -67,15 +67,17 @@ def graphql(query, variables):
 QUERY = """
 query($login:String!){
   user(login:$login){
+    createdAt
     pullRequests{totalCount}
     repositoriesContributedTo(includeUserRepositories:false,
       contributionTypes:[COMMIT,PULL_REQUEST,ISSUE,REPOSITORY,PULL_REQUEST_REVIEW]){totalCount}
     contributionsCollection{
       totalCommitContributions
       restrictedContributionsCount
+      contributionYears
       contributionCalendar{
         totalContributions
-        weeks{ contributionDays{ date contributionCount } }
+        weeks{ contributionDays{ date weekday contributionCount } }
       }
     }
     repositories(first:100, ownerAffiliations:OWNER, isFork:false){
@@ -130,6 +132,32 @@ def fetch():
         else:
             run = 0
 
+    # contribution-activity card: weekly totals + busiest weekday
+    weekday_totals = [0] * 7
+    weekly = []
+    for w in cc["contributionCalendar"]["weeks"]:
+        s = 0
+        for d in w["contributionDays"]:
+            weekday_totals[d["weekday"]] += d["contributionCount"]
+            s += d["contributionCount"]
+        weekly.append(s)
+    day_names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    best_day = day_names[weekday_totals.index(max(weekday_totals))]
+
+    # all-time contributions: sum each active year's calendar total
+    years = cc["contributionYears"]
+    year_q = "\n".join(
+        f'y{y}:contributionsCollection(from:"{y}-01-01T00:00:00Z",'
+        f'to:"{y}-12-31T23:59:59Z"){{contributionCalendar{{totalContributions}}}}'
+        for y in years
+    )
+    yd = graphql(
+        "query($login:String!){user(login:$login){" + year_q + "}}", {"login": LOGIN}
+    )["user"]
+    alltime = sum(
+        yd[f"y{y}"]["contributionCalendar"]["totalContributions"] for y in years
+    )
+
     return {
         "stars": stars,
         "commits": cc["totalCommitContributions"]
@@ -140,6 +168,10 @@ def fetch():
         "streak_total": cc["contributionCalendar"]["totalContributions"],
         "streak_longest": longest,
         "langs": langs,
+        "since": data["createdAt"][:4],
+        "alltime": alltime,
+        "best_day": best_day,
+        "weekly": weekly,
     }
 
 
@@ -274,6 +306,62 @@ def render_langs(d):
 </svg>'''
 
 
+def render_activity(d):
+    chips = [
+        ("Coding since", d["since"], C["blue"]),
+        ("All-time contributions", f"{d['alltime']:,}", C["purple"]),
+        ("Most active day", d["best_day"], C["orange"]),
+    ]
+    chip_svg = ""
+    cx = 40
+    for lab, val, col in chips:
+        w = 240
+        chip_svg += f'''
+  <g transform="translate({cx} 72)">
+    <rect width="{w}" height="56" rx="11" fill="#10121b" stroke="{C["border"]}"/>
+    <rect width="4" height="56" rx="2" fill="{col}"/>
+    <text x="18" y="24" fill="{C["muted"]}" font-size="11">{lab}</text>
+    <text x="18" y="45" fill="{C["bright"]}" font-size="19" font-weight="700">{val}</text>
+  </g>'''
+        cx += w + 16
+
+    weekly = d["weekly"]
+    W, H, pad = 768, 150, 44
+    mx = max(weekly) or 1
+    n = max(len(weekly), 2)
+    base_y = 170 + H - 60
+    pts = [
+        (pad + i * (W - 2 * pad) / (n - 1), 170 + (H - 60) - v / mx * (H - 72))
+        for i, v in enumerate(weekly)
+    ]
+    poly = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+    area = f"{pad},{base_y:.1f} " + poly + f" {pad + (W - 2 * pad):.1f},{base_y:.1f}"
+    peak_x, peak_y = pts[weekly.index(mx)]
+
+    return f'''<svg width="840" height="300" viewBox="0 0 840 300" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',Ubuntu,Helvetica,Arial,sans-serif">
+  <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="{C["orange"]}" stop-opacity="0.38"/>
+    <stop offset="1" stop-color="{C["orange"]}" stop-opacity="0"/></linearGradient></defs>
+  <style>
+    .blink{{animation:blink 1.6s ease-in-out infinite}}
+    @keyframes blink{{0%,100%{{opacity:.35}}50%{{opacity:1}}}}
+    .draw{{stroke-dasharray:4000;animation:dr 2.2s ease}}
+    @keyframes dr{{from{{stroke-dashoffset:4000}}}}
+    .pk{{animation:pp 1.6s ease-in-out infinite}}
+    @keyframes pp{{0%,100%{{r:3.5}}50%{{r:5.5}}}}
+  </style>
+  <rect x="1" y="1" width="838" height="298" rx="15" fill="{C["bg"]}" stroke="{C["border"]}" stroke-width="1.5"/>
+  <circle class="blink" cx="44" cy="44" r="5" fill="{C["blue"]}"/>
+  <text x="60" y="49" fill="{C["blue"]}" font-size="17" font-weight="700">Contribution Activity</text>
+  {chip_svg}
+  <text x="40" y="158" fill="{C["muted"]}" font-size="12">Weekly contributions · last 12 months</text>
+  <polygon points="{area}" fill="url(#ag)"/>
+  <polyline class="draw" points="{poly}" fill="none" stroke="{C["orange"]}" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle class="pk" cx="{peak_x:.1f}" cy="{peak_y:.1f}" r="4" fill="{C["orange"]}"/>
+  <text x="{peak_x:.0f}" y="{peak_y - 12:.0f}" text-anchor="middle" fill="{C["bright"]}" font-size="11" font-weight="700">{mx}</text>
+</svg>'''
+
+
 def main():
     if not TOKEN:
         print("ERROR: set GH_TOKEN or GITHUB_TOKEN", file=sys.stderr)
@@ -284,7 +372,9 @@ def main():
         f.write(render_stats(d))
     with open("assets/langs.svg", "w") as f:
         f.write(render_langs(d))
-    print("wrote assets/stats.svg, assets/langs.svg")
+    with open("assets/activity.svg", "w") as f:
+        f.write(render_activity(d))
+    print("wrote assets/stats.svg, assets/langs.svg, assets/activity.svg")
 
 
 if __name__ == "__main__":
