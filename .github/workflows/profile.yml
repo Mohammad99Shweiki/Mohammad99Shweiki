@@ -2,7 +2,7 @@ name: Refresh profile cards
 
 on:
   schedule:
-    - cron: "17 5 * * *"   # daily ~05:17 UTC
+    - cron: "50 23 * * *"  # daily ~23:50 UTC, late so "today" has a full day's contributions
   workflow_dispatch:        # manual run button
 
 permissions:
