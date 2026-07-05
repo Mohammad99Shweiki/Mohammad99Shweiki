@@ -14,41 +14,41 @@
   <text x="34" y="80" fill="#c0caf5" font-size="14">Python</text>
   <rect x="170" y="70" width="560" height="9" rx="4.5" fill="#222638"/>
   <g clip-path="url(#b0)">
-    <rect class="bar" style="animation-delay:0.00s" x="170" y="70" width="440.5" height="9" rx="4.5" fill="#7dcfff"/>
+    <rect class="bar" style="animation-delay:0.00s" x="170" y="70" width="436.5" height="9" rx="4.5" fill="#7dcfff"/>
     <rect class="shine" style="animation-delay:0.00s" x="0" y="70" width="80" height="9" fill="#ffffff" opacity="0.25"/>
   </g>
-  <clipPath id="b0"><rect x="170" y="70" width="440.5" height="9" rx="4.5"/></clipPath>
-  <text x="800" y="80" text-anchor="end" fill="#787c99" font-size="13">79%</text>
+  <clipPath id="b0"><rect x="170" y="70" width="436.5" height="9" rx="4.5"/></clipPath>
+  <text x="800" y="80" text-anchor="end" fill="#787c99" font-size="13">78%</text>
   <text x="34" y="116" fill="#c0caf5" font-size="14">TypeScript</text>
   <rect x="170" y="106" width="560" height="9" rx="4.5" fill="#222638"/>
   <g clip-path="url(#b1)">
-    <rect class="bar" style="animation-delay:0.10s" x="170" y="106" width="96.9" height="9" rx="4.5" fill="#7aa2f7"/>
+    <rect class="bar" style="animation-delay:0.10s" x="170" y="106" width="101.1" height="9" rx="4.5" fill="#7aa2f7"/>
     <rect class="shine" style="animation-delay:0.10s" x="0" y="106" width="80" height="9" fill="#ffffff" opacity="0.25"/>
   </g>
-  <clipPath id="b1"><rect x="170" y="106" width="96.9" height="9" rx="4.5"/></clipPath>
-  <text x="800" y="116" text-anchor="end" fill="#787c99" font-size="13">17%</text>
+  <clipPath id="b1"><rect x="170" y="106" width="101.1" height="9" rx="4.5"/></clipPath>
+  <text x="800" y="116" text-anchor="end" fill="#787c99" font-size="13">18%</text>
   <text x="34" y="152" fill="#c0caf5" font-size="14">Java</text>
   <rect x="170" y="142" width="560" height="9" rx="4.5" fill="#222638"/>
   <g clip-path="url(#b2)">
-    <rect class="bar" style="animation-delay:0.20s" x="170" y="142" width="11.2" height="9" rx="4.5" fill="#ff9e64"/>
+    <rect class="bar" style="animation-delay:0.20s" x="170" y="142" width="11.1" height="9" rx="4.5" fill="#ff9e64"/>
     <rect class="shine" style="animation-delay:0.20s" x="0" y="142" width="80" height="9" fill="#ffffff" opacity="0.25"/>
   </g>
-  <clipPath id="b2"><rect x="170" y="142" width="11.2" height="9" rx="4.5"/></clipPath>
+  <clipPath id="b2"><rect x="170" y="142" width="11.1" height="9" rx="4.5"/></clipPath>
   <text x="800" y="152" text-anchor="end" fill="#787c99" font-size="13">2%</text>
   <text x="34" y="188" fill="#c0caf5" font-size="14">HTML</text>
   <rect x="170" y="178" width="560" height="9" rx="4.5" fill="#222638"/>
   <g clip-path="url(#b3)">
-    <rect class="bar" style="animation-delay:0.30s" x="170" y="178" width="7.7" height="9" rx="4.5" fill="#f7768e"/>
+    <rect class="bar" style="animation-delay:0.30s" x="170" y="178" width="7.6" height="9" rx="4.5" fill="#f7768e"/>
     <rect class="shine" style="animation-delay:0.30s" x="0" y="178" width="80" height="9" fill="#ffffff" opacity="0.25"/>
   </g>
-  <clipPath id="b3"><rect x="170" y="178" width="7.7" height="9" rx="4.5"/></clipPath>
+  <clipPath id="b3"><rect x="170" y="178" width="7.6" height="9" rx="4.5"/></clipPath>
   <text x="800" y="188" text-anchor="end" fill="#787c99" font-size="13">1%</text>
   <text x="34" y="224" fill="#c0caf5" font-size="14">Jupyter Notebook</text>
   <rect x="170" y="214" width="560" height="9" rx="4.5" fill="#222638"/>
   <g clip-path="url(#b4)">
-    <rect class="bar" style="animation-delay:0.40s" x="170" y="214" width="3.7" height="9" rx="4.5" fill="#7aa2f7"/>
+    <rect class="bar" style="animation-delay:0.40s" x="170" y="214" width="3.6" height="9" rx="4.5" fill="#7aa2f7"/>
     <rect class="shine" style="animation-delay:0.40s" x="0" y="214" width="80" height="9" fill="#ffffff" opacity="0.25"/>
   </g>
-  <clipPath id="b4"><rect x="170" y="214" width="3.7" height="9" rx="4.5"/></clipPath>
+  <clipPath id="b4"><rect x="170" y="214" width="3.6" height="9" rx="4.5"/></clipPath>
   <text x="800" y="224" text-anchor="end" fill="#787c99" font-size="13">1%</text>
 </svg>
