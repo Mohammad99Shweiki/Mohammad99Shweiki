@@ -50,7 +50,7 @@
     <g class="row" style="animation-delay:0.18s" transform="translate(0 154)">
       <g transform="translate(22 -4)"><circle cx="-5" cy="-4" r="2.3" fill="none" stroke="#bb9af7" stroke-width="1.8"/><circle cx="-5" cy="4" r="2.3" fill="none" stroke="#bb9af7" stroke-width="1.8"/><circle cx="5" cy="4" r="2.3" fill="none" stroke="#bb9af7" stroke-width="1.8"/><path d="M-5 -2 V2 M-5 2 H5 V2" fill="none" stroke="#bb9af7" stroke-width="1.8"/></g>
       <text x="46" y="0" class="lbl">Pull Requests</text>
-      <text x="430" y="0" class="val" text-anchor="end">325</text>
+      <text x="430" y="0" class="val" text-anchor="end">331</text>
     </g>
     <g class="row" style="animation-delay:0.27s" transform="translate(0 188)">
       <g transform="translate(22 -4)"><circle r="6.5" fill="none" stroke="#bb9af7" stroke-width="1.8"/><path d="M0 0 L0 -6.5 A6.5 6.5 0 0 1 5 4" fill="none" stroke="#bb9af7" stroke-width="1.8"/></g>
@@ -71,5 +71,5 @@
   </g>
   <text class="num" x="709" y="135" text-anchor="middle" fill="#ff9e64" font-size="40" font-weight="800">11</text>
   <text x="709" y="152" text-anchor="middle" fill="#787c99" font-size="10" letter-spacing="1.5">DAY STREAK</text>
-  <text x="709" y="212" text-anchor="middle" class="meta">Total <tspan class="metab">1483</tspan>  ·  Longest <tspan class="metab">11</tspan></text>
+  <text x="709" y="212" text-anchor="middle" class="meta">Total <tspan class="metab">1489</tspan>  ·  Longest <tspan class="metab">11</tspan></text>
 </svg>
