@@ -11,7 +11,6 @@
   <img height="40" src="https://img.shields.io/badge/Java-161a26?style=for-the-badge&logo=openjdk&logoColor=ff9e64&labelColor=161a26" alt="Java">
   <img height="40" src="https://img.shields.io/badge/PostgreSQL-161a26?style=for-the-badge&logo=postgresql&logoColor=bb9af7&labelColor=161a26" alt="PostgreSQL">
   <img height="40" src="https://img.shields.io/badge/Docker-161a26?style=for-the-badge&logo=docker&logoColor=7aa2f7&labelColor=161a26" alt="Docker">
-  <img height="40" src="https://img.shields.io/badge/Redis-161a26?style=for-the-badge&logo=redis&logoColor=f7768e&labelColor=161a26" alt="Redis">
 </p>
 
 <p align="center">
